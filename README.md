@@ -3,7 +3,7 @@ Projetar dados e possíveis cenários hipotéticos futuros é uma tarefa que per
 Palavras Chave 
 Econometria, Sinais e Ruídos, Extrapolação e Projeção de Dados, Volatilidade, Longa Persistência e Memória. 
 
-Atenção : Resultados obtidos a partir de simulações numéricos.A realidade pode diferir bastante
+Atenção : Resultados obtidos a partir de simulações numéricas.A realidade pode diferir bastante
           Rentabilidade passada não significa rentabilidade futura 
           Enviesada no viés comportamental de ancoragem ( prever o futuro baseado no presente e passado * aborgdagem autoregressiva)
           Para fins educacionais, apenas
