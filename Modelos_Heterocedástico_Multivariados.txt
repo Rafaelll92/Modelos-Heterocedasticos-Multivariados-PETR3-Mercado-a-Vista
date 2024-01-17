@@ -578,11 +578,19 @@ sm.graphics.tsa.plot_acf((PETR3_SA_Close_fractional_difference_Linear_filtred_tr
 plt.show()
 
 
-########################################################
-#                                                      #
-#           Espectograma                               #
-#                                                      #
-########################################################
+#############################/                                               \##################################
+#                                                      
+#           Espectograma   
+#
+#    Wolf,Peter 2.5: Noise Modeling - White, Pink, and Brown Noise, Pops and Crackles
+#
+#   https://eng.libretexts.org/Bookshelves/
+#	Industrial_and_Systems_Engineering/Chemical_Process_Dynamics_and_Controls_(Woolf)
+#	/02%3A_Modeling_Basics/
+#	2.05%3A_Noise_modeling-
+#    _more_detailed_information_on_noise_modeling-_white%2C_pink%2C_and_brown_noise%2C_pops_and_crackles                            
+#                                                      
+#############################/                                                \#################################
 
 # Obtendo a taxa de amostragem através das duas primeiras observaçõs dos log retornos da série para a amostragem de treino
 inter_sample_time = PETR3_SA_Close_fractional_difference_Linear_filtred_train.values[1] - PETR3_SA_Close_fractional_difference_Linear_filtred_train.values[0]
