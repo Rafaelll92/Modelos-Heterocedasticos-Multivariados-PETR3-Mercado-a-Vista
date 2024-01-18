@@ -3,6 +3,9 @@ Projetar dados e possíveis cenários hipotéticos futuros é uma tarefa que per
 Palavras Chave 
 Econometria, Sinais e Ruídos, Extrapolação e Projeção de Dados, Volatilidade, Longa Persistência e Memória. 
 
+Hetreocedásticos = Volatilidade fica variando ao longo do tempo.Multivariados=Leva em conta além do prórpio preço de fechamento, também o volume e a volatilidade da série analisada em si
+
+
 Atenção : Resultados obtidos a partir de simulações numéricas.A realidade pode diferir bastante
           Rentabilidade passada não significa rentabilidade futura 
           Enviesada no viés comportamental de ancoragem ( prever o futuro baseado no presente e passado * aborgdagem autoregressiva)
