@@ -4153,6 +4153,13 @@ def function_to_scale_data(x , interval_min  , interval_max):
 PETR3_SA_Close_test_estimated=PETR3_SA_Close[:-30].values[-1].ravel()*np.exp(np.cumsum(PETR3_SA_Close_fractional_difference_train.values[-1].ravel()*function_to_scale_data(PETR3_SA_Close_all_together_forecasted_test_mean,-1,1)))
 PETR3_SA_Close_test_estimated_std = PETR3_SA_Close[:-30].values[-1].ravel()*np.exp(np.cumsum(PETR3_SA_Close_fractional_difference_train.values[-1].ravel()*function_to_scale_data(PETR3_SA_Close_all_together_forecasted_test_std,-1,1)))
 PETR3_SA_Close_test_observed= PETR3_SA_Close[:-30].values[-1].ravel()*np.exp(np.cumsum(PETR3_SA_Close_fractional_difference_test))
+#All_together_model_obs_vs_estimated_train..png
+#All_together_model_obs_vs_estimated_test..png
+#All_together_model_histograma_treino_estimado_vs_observado.png
+#All_together_model_histograma_teste_estimado_vs_observado.png
+#All_together_model_histograma_treino_estimado_vs_observado.png
+#Figure_5-1_All_together_in_sample_train_QQplots.png
+#igure_5-1_All_together_out_sample_teste_QQplots.png
 
 ####################################
 #  Out of Sample                   #
