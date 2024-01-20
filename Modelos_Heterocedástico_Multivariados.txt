@@ -577,7 +577,7 @@ sm.graphics.tsa.plot_pacf((PETR3_SA_Close_fractional_difference_Linear_filtred_t
 sm.graphics.tsa.plot_acf((PETR3_SA_Close_fractional_difference_Linear_filtred_train), lags=50)  # q = 1
 plt.show()
 
-
+Figure_1-1f_pacf_PETR3_LOG_DIFF_LINEAR_FILTRED
 #############################/                                               \##################################
 #                                                      
 #           Espectograma   
@@ -619,6 +619,9 @@ plt.xlabel('freq (Hz)')
 plt.ylabel('PSD')
 plt.margins(0.02)
 plt.show()
+
+Figure_1-1g
+
 
 frequency = np.log(abs(f.flatten()))
 frequency[np.isneginf(frequency)] = np.mean(frequency)
@@ -922,6 +925,8 @@ plt.show()
 sm.graphics.tsa.plot_pacf((volatility_PETR3_SA_Close_SV_MomentumLSTM.values), lags=50, method="ywm") #1
 plt.show()
 
+#Figure_2-1a_pacf_volatility..png
+
 v_predict_all = parameters_SVVol_MomentumLSTM['v_new']
 v_predict = parameters_SVVol_MomentumLSTM['v_new'].mean(axis=0)
 
@@ -951,7 +956,7 @@ plt.show()
 sm.graphics.tsa.plot_pacf((volume_PETR3_SA_Close_SV_MomentumLSTM.values), lags=50, method="ywm") #1
 plt.show()
 
-
+#Figure_2-1b_pacf_volume..png
 
 #########*/                                                     *\###########
 #
@@ -1008,6 +1013,12 @@ Bidirectional_MomentumLSTM_Gegenbauer_FARMA_MomentumGRU_MS_GJR_GARCH_X = """
 //https://discourse.mc-stan.org/t/chains-not-mixing-for-gegenbauer-time-series/12437 Gegenbauer implementation Stan
 //https://groups.google.com/g/stan-users/c/BTdmJlXnk-Q FARMA-GARCH implementation Stan HMC
 //https://discourse.mc-stan.org/t/gjr-garch-model-in-stan/3590  GJR-GRACH implementation Stan HMC
+
+//[Damiano , Peterson et Weylandt, 2017] https://luisdamiano.github.io/stancon18/hmm_stan_tutorial.pdf  
+A Tutorial on Hidden Markov Models using Stan
+Luis Damiano (Universidad Nacional de Rosario), Brian Peterson (University of
+Washington), Michael Weylandt (Rice University)
+2017-12-15
 
 //[BETANCOURT , 2017] Betancourt. M (2017) , A Conceptual Introduction to Hamiltonian Monte Carlo, 2017. 
 //https://doi.org/20.48550/arXiv.1701.02434.
@@ -1521,9 +1532,6 @@ Bidirectional_MomentumLSTM_Gegenbauer_FARMA_MomentumGRU_MS_GJR_GARCH_X= pystan.S
 # Estimação da densidade espectral de potência usando um periodograma
 f, Pxx = signal.periodogram(PETR3_SA_Close_Linear_filtred_train.values)
 
-plt.plot(f, Pxx)
-plt.show()
-
 top_3_periods = {}
 
 # Obtendo índices para os 3 valores  mais altos
@@ -1751,6 +1759,9 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+# Figure_2-1_modelo02_in_sample_train_CI.png
+
+
 mean = function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear2_test.values,-1,1).ravel() 
 std = np.std(PETR3_SA_Close_forecasted_nonLinear_all2[-len(PETR3_SA_Close_fractional_difference_Linear_filtred_test):].values, axis=1)
 Credibility_intervals = 1.960 * (std/np.sqrt(len(PETR3_SA_Close_fractional_difference_Linear_filtred_test)))
@@ -1766,6 +1777,9 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_2-1_modelo02_out_sample_test_CI.png
+
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_train.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra observada de treino")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear2_train.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra estimada de treino")
 plt.suptitle('Histograma para amostras estimadas  e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -1774,6 +1788,8 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_2-1_modelo02_in_sample_train_Histogram
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra observado de teste")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear2_test.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra estimada de teste")
 plt.suptitle('Histograma para amostras estimadas de teste e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -1781,6 +1797,8 @@ plt.grid(True)
 plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
+
+#Figure_2-1_modelo02_out_sample_test_Histogram.png
 
 def qqplot(x, y, quantiles=None, interpolation='nearest', ax=None, rug=False,
            rug_length=0.05, rug_kwargs=None, **kwargs):
@@ -1864,11 +1882,15 @@ plt.ylabel('QQplot realidade observada de treino')
 plt.title('QQplots para as duas amostras  de treino')
 plt.show()
 
+#Figure_2-1_modelo02_in_sample_train_QQplots
+
 qqplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear2_test.values,-1,1).ravel(), function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(), c='r', alpha=0.1, edgecolor='k')
 plt.xlabel('QQplot amostras estimadas de teste')
 plt.ylabel('QQplot realidade observada de teste')
 plt.title('QQplots para as duas amostras de teste')
 plt.show()	
+
+#Figure_2-1_modelo02_out_sample_teste_QQplots
 	
 ######################################################################################################
 # Para a amostragem de treino Caudas leves                                                           #
@@ -2417,6 +2439,7 @@ class GAdam(Optimizer):
    def __init__(self, params, lr=1e-2, betas=(0.1, 0.199), optimism=0.0, avg_sq_mode='weight',
              amsgrad_decay=1, weight_decay=0, l1_decay=0, late_weight_decay=True, eps=1e-8):
       """Implements generalization of Adam, AdaMax, AMSGrad algorithms.
+      https://github.com/SSS135/gadam
       Adam and AdaMax has been proposed in `Adam: A Method for Stochastic Optimization`_.
       With `betas` = (beta1, 0) and `amsgrad_decay` = beta2 it will become AdaMax.
       With `amsgrad_decay` = 0 it will become AMSGrad.
@@ -2570,7 +2593,8 @@ class GAdam(Optimizer):
 class EarlyStopping:
     """
 	 [GOODFELLOW , BENGIO & COURVILLE, 2016] Goodfellow, I., Y. Bengio & A.Courville (2016), Deep Learning, 2016.MIT Press , Cambridge, MA, USA.
-	 Early stops interrompe o treinamento se a perda de validação não melhorar após uma determinada paciência..
+	 Early stops interrompe o treinamento se a perda de validação não melhorar após uma determinada paciência.
+         https://stackoverflow.com/questions/71891964/how-to-load-early-stopping-counter-in-pytorch
 	 """
     def __init__(self, patience=7, verbose=False, delta=0, path='checkpoint.pt', trace_func=print):
        """
@@ -2679,6 +2703,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+#Epochs-Convergence_model03.
 
 pd.DataFrame(model(X_train).cpu().detach().numpy().ravel()).to_csv (r'C:\Users\Rafael Xavier Botelho\Documents\Desktop\Trabalho-Github\PETR3_SA_Close_forecasted_nonLinear3_train.csv', index=None)
 PETR3_SA_Close_forecasted_nonLinear3_train = pd.read_csv("C:/Users/Rafael Xavier Botelho/Documents/Desktop/Trabalho-Github/PETR3_SA_Close_forecasted_nonLinear3_train.csv")
@@ -2732,6 +2757,8 @@ print(dist.summary)
 dist.plot()
 plt.show()
 
+#Figure_3-1_epdf_modelo03_in_sample_train.png
+
 ####################################
 #  Out of Sample                   #
 #        Peformace preditiva KPI   #
@@ -2781,6 +2808,8 @@ print(dist.summary)
 # Plot resultados
 dist.plot()
 plt.show()
+#Figure_3-1_epdf_modelo03_out_sample_test.png
+
 
 ####################################
 #  Out of Sample                   #
@@ -2836,7 +2865,7 @@ plt.plot(function_to_scale_data(lower_bands.ravel(),-1,1)  , linestyle= '--', li
 plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
-
+#modelo03_obs_vs_est.png
 
 mean = function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear3_test.values,-1,1).ravel()
 std = np.array([CNN_Attention_Bidirectional_MS_LSTM_Encoder_Decoder_predictions(model.eval(), X_train ,pd.DataFrame(PETR3_SA_Close_and_its_own_volatility_and_volume_test), len(PETR3_SA_Close_and_its_own_volatility_and_volume_test)) for _ in range(7500)])
@@ -2854,6 +2883,8 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#modelo03_obs_vs_est_test..png
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_train.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra observada de treino")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear3_train.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra  estimada de treino ")
 plt.suptitle('Histograma para amostras estimadas  e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -2862,6 +2893,9 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_3-1_modelo03_in_sample_train_Histogram.png
+
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra de teste observada")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear3_test.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra de teste estimada/extrapolada")
 plt.suptitle('Histograma para amostras estimadas de teste e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -2869,6 +2903,8 @@ plt.grid(True)
 plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
+
+#Figure_3-1_modelo03_out_sample_test_Histogram.png
 
 #######/                               \#######
 #                                             #
@@ -2904,11 +2940,15 @@ plt.ylabel('QQplot realidade observada ')
 plt.title('QQplots para as duas amostras ')
 plt.show()
 
+#Figure_3-1_modelo03_in_sample_train_QQplots.png
+
 qqplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel() , function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear3_test.values,-1,1).ravel(), c='r', alpha=0.1, edgecolor='k')
 plt.xlabel('QQplot amostras estimadas de teste')
 plt.ylabel('QQplot realidade observada de teste')
 plt.title('QQplots para as duas amostras de teste')
 plt.show()	
+
+#
 	
 
 ######################################################################################################
@@ -2990,7 +3030,8 @@ y_test=  torch.FloatTensor(y_test).to(device)
 
 
 class TimeDistributed(nn.Module):
-   "Aplica um módulo sobre tdim (time dimension) de forma idêntica para cada etapa" 
+   "Aplica um módulo sobre tdim (time dimension) de forma idêntica para cada etapa
+    https://github.com/pytorch/pytorch/issues/1927   Salim Khazem"
    def __init__(self, module, low_mem=False, tdim=1):
       super(TimeDistributed, self).__init__()
       self.module = module
@@ -3021,6 +3062,7 @@ class TimeDistributed(nn.Module):
 	  
 	
 class CausalConv2d(nn.Conv2d):
+   "https://gist.github.com/wassname/7eb4095a4f3d3b5eea8adaaf4419c822"
    def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=None, dilation=1, groups=1, bias=True):
       kernel_size = _pair(kernel_size)
       stride = _pair(stride)
@@ -3039,6 +3081,7 @@ class CausalConv2d(nn.Conv2d):
 		
 class MyDropout(nn.Module):
    def __init__(self, p):
+      "https://gist.github.com/mohcinemadkour/0ae0fff3f81c82d83b9d9615f13a2861"
       super(MyDropout, self).__init__()
       self.p = p
       # multiplicador é 1/(1-p). Definir o multiplicador para 0 quando p=1 para evitar erros
@@ -3618,6 +3661,8 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+#Epochs-Convergence_model04.png
+
 pd.DataFrame(function_to_scale_data(pd.DataFrame(model(X_train).cpu().detach().numpy().ravel()),-1,1)).to_csv (r'C:\Users\Rafael Xavier Botelho\Documents\Desktop\Trabalho-Github\PETR3_SA_Close_forecasted_nonLinear4_train.csv', index=None)
 PETR3_SA_Close_forecasted_nonLinear4_train = pd.read_csv("C:/Users/Rafael Xavier Botelho/Documents/Desktop/Trabalho-Github/PETR3_SA_Close_forecasted_nonLinear4_train.csv")
 
@@ -3644,6 +3689,8 @@ print(dist.summary)
 # Plot resultados
 dist.plot()
 plt.show()
+
+#Figure_4-1_epdf_modelo04_in_sample_train.png
 
 #######################
 #   In Sample KPI     #
@@ -3720,6 +3767,9 @@ print(dist.summary)
 dist.plot()
 plt.show()
 
+#Figure_4-1_modelo04_out_sample_test_pdf.png
+
+
 ####################################
 #  Out of Sample                   #
 #        Peformace preditiva KPI   #
@@ -3774,6 +3824,8 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#modelo04_obs_vs_est.png
+
 mean = function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear4_test.values,-1,1).ravel()
 std = np.array([predictions_CasualCNN_Bidirectional_MomentumConvLSTM_AdittiveAttention_Encoder_Decoder(model.eval(), X_train ,pd.DataFrame(PETR3_SA_Close_and_its_own_volatility_and_volume_test), len(PETR3_SA_Close_and_its_own_volatility_and_volume_test)) for _ in range(7500)])
 std = np.std(std, axis=0)
@@ -3790,6 +3842,9 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#modelo04_obs_vs_est_test..png
+
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_train.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra observada")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear4_train.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra  estimada ")
 plt.suptitle('Histograma para amostras estimadas  e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -3797,6 +3852,8 @@ plt.grid(True)
 plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
+
+#Figure_4-1_modelo03_in_sample_train_Histogram.png
 
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra de teste observada")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear4_test.values,-1,1).ravel(),bins=10,color='blue', label = "Amostra de teste estimada/extrapolada")
@@ -3806,6 +3863,7 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_4-1_modelo03_out_sample_test_Histogram.png
 #######/                               \#######
 #                                             #
 #    KPI de Risco.Binômio de risco vs retorno #
@@ -3840,14 +3898,19 @@ plt.ylabel('QQplot realidade observada ')
 plt.title('QQplots para as duas amostras ')
 plt.show()
 
+#Figure_4-1_modelo04_in_sample_train_QQplots.png
+
 qqplot(function_to_scale_data(PETR3_SA_Close_forecasted_nonLinear4_test.values,-1,1).ravel(), function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(), c='r', alpha=0.1, edgecolor='k')
 plt.xlabel('QQplot amostras estimadas de teste')
 plt.ylabel('QQplot realidade observada de teste')
 plt.title('QQplots para as duas amostras de teste')
 plt.show()	
-	
+
+#Figure_4-1_modelo04_out_sample_teste_QQplots.png
+
+
 ######################################################################################################
-# Para a amostragem de treino Normal                                                                 #
+# Para a amostragem de treino Distribuição Normal                                                    #
 # Para a amostragem de teste  com caudas leves                                                       #
 ######################################################################################################
 
@@ -3893,6 +3956,7 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#modelo04_obs_vs_est.png
 PETR3_SA_Close_forecasted_nonLinear2_test = pd.read_csv("C:/Users/Rafael Xavier Botelho/Documents/Desktop/Trabalho-Github/PETR3_SA_Close_forecasted_nonLinear2_test.csv")
 PETR3_SA_Close_forecasted_nonLinear3_test = pd.read_csv("C:/Users/Rafael Xavier Botelho/Documents/Desktop/Trabalho-Github/PETR3_SA_Close_forecasted_nonLinear3_test.csv")
 PETR3_SA_Close_forecasted_nonLinear4_test = pd.read_csv("C:/Users/Rafael Xavier Botelho/Documents/Desktop/Trabalho-Github/PETR3_SA_Close_forecasted_nonLinear4_test.csv")
@@ -3935,6 +3999,8 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#modelo04_obs_vs_est_test..png
+
 mean_forecasted_train = np.mean(function_to_scale_data(PETR3_SA_Close_all_together_forecasted_train_mean,-1,1).ravel())
 std_forecasted_train  = np.std(function_to_scale_data(PETR3_SA_Close_all_together_forecasted_train_mean,-1,1).ravel())
 print('retorno_forecasted_train: %f   ,risco_forecasted_train: %f' % (mean_forecasted_train,std_forecasted_train))
@@ -3973,6 +4039,8 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_4-1_modelo03_in_sample_train_Histogram.png
+
 sns.distplot(function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(),bins=10,color='red',  label = "Amostra de teste observada")  
 sns.distplot(function_to_scale_data(PETR3_SA_Close_all_together_forecasted_test_mean,-1,1).ravel(),bins=10,color='blue', label = "Amostra  estimada de teste para todos os modelos juntos")
 plt.suptitle('Histograma para amostras estimadas de teste e sua respectiva  realidade observada ' ,fontsize=12, color='black')
@@ -3981,6 +4049,7 @@ plt.legend(loc = "upper left")
 plt.plot(0.0, 1.0)
 plt.show()
 
+#Figure_4-1_modelo03_out_sample_test_Histogram.png
 
 #######################
 #   In Sample KPI     #
@@ -4039,11 +4108,16 @@ plt.ylabel('QQplot realidade observada ')
 plt.title('QQplots para as duas amostras ')
 plt.show()
 
+#Figure_4-1_modelo04_in_sample_train_QQplots.png
+
 qqplot(function_to_scale_data(PETR3_SA_Close_all_together_forecasted_test_mean,-1,1).ravel(), function_to_scale_data(PETR3_SA_Close_fractional_difference_Linear_filtred_test.values,-1,1).ravel(), c='r', alpha=0.1, edgecolor='k')
 plt.xlabel('QQplot amostras estimadas de teste')
 plt.ylabel('QQplot realidade observada de teste')
 plt.title('QQplots para as duas amostras de teste')
 plt.show()
+
+#Figure_4-1_modelo04_out_sample_teste_QQplots.png
+
 
 ######################################################################################################
 # Para a amostragem de treino com caudas leves                                                       #
@@ -4129,12 +4203,16 @@ ax2.tick_params(axis='y', labelcolor=color)
 fig.tight_layout() 
 plt.show()
 
+#Figure_5-1_Resultado_Final_estimado_vs_observado.png
+
 plt.title('PETR3_SA estimação da amostragem de teste e extrapolação para o período de teste ')
 plt.plot(PETR3_SA_Close_test_estimated, label = "Amostra estimada para os três modelos juntos  de teste")
 plt.plot(upper_bands , linestyle= '--', linewidth =0.7, label = "Intervalo de Credibilidade superior a 95")
 plt.plot(lower_bands , linestyle= '--', linewidth =0.7, label = "Intervalo de Credibilidade inferior a 95")
 plt.legend(loc = "upper left")
-plt.show()	
+plt.show()
+
+#Figure_5-3_PETR3.SA_estimated_IC.png
 
 Initial_Price = PETR3_SA_Close_test_estimated.values[0]
 final_Price = PETR3_SA_Close_test_estimated.values[-1]
