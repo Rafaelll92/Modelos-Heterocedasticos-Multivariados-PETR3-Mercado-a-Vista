@@ -8,6 +8,6 @@ Hetreocedásticos = Volatilidade fica variando ao longo do tempo.Multivariados=L
 
 Atenção : Resultados obtidos a partir de simulações numéricas.A realidade pode diferir bastante
           Rentabilidade passada não significa rentabilidade futura 
-          Enviesada no viés comportamental de ancoragem ( prever o futuro baseado no presente e passado * aborgdagem autoregressiva)
+          Enviesada no viés comportamental de ancoragem e da disponibilidade  ( prever o futuro baseado no presente e passado * aborgdagem autoregressiva)
           Para fins educacionais, apenas
           
