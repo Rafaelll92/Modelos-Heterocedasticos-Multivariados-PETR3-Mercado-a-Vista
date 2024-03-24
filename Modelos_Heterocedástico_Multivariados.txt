@@ -4273,7 +4273,7 @@ print('Peso_Long: %f  , Peso_Short:%f  ' % (Amplitude_Long, Amplitude_Short))
 #      imprevisível justamente porque sua natureza é aleatóriedade pura, caos.Hipotese Fraca de Mercado.
 #      Concorrência Perfeitamente Elastíca, pelo menos para os modelos  aqui apresentados.
 #      Concerteza existem sim modelos mais recentes que os clássicos apresentados aqui, LSTM(1997) ,CNN(1998),ARMA(1980),SV AR(1982),Garch(1982) e afins, tais como
-#      Autoencoders Transformers, Bert e variantes , bem como o prório Chat GPT ,em suas versões mais recentes, para serem aboradados em pesquisas futuras.
+#      Autoencoders Transformers, Bert e variantes , bem como o prório Chat GPT ,em suas versões mais recentes, para serem abordados em pesquisas futuras.
 #      Entretanto , a abordagem mais precisa é a passiva Long 'n Hold das principais Blue Chips infraestruturais do país ,
 #      tais como Bancos, Energia ,Saneamento/Seguradoras ,Telecon ( metódo BEST do Luis Carlos Barsi)
 ###########################/ *                    *\ ########################################                
